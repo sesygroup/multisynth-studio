@@ -15,7 +15,7 @@ limitations under the License.
 -->
 # MultiSynth Studio
 
-Full project details, background and more are available on the [project documention website](https://sesygroup.github.io/choreography-analyzer).
+Full project details, background and more are available on the [project documention website](https://sesygroup.github.io/multisynth-studio).
 
 ## License
 Licensed under the Apache Software License, Version 2.0.
