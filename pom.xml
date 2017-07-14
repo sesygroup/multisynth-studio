@@ -162,7 +162,8 @@
       <choreography-specification.version>1.0.0</choreography-specification.version>
       <abstract-participant-behavior.version>1.0.0</abstract-participant-behavior.version>
       <concrete-participant-behavior.version>1.0.0</concrete-participant-behavior.version>
-      <coordination-delegate-generator.version>1.0.0-SNAPSHOT</coordination-delegate-generator.version>
+      <coordination-logic-extractor.version>1.0.0</coordination-logic-extractor.version>
+      <coordination-logic-concretizator.version>1.0.0</coordination-logic-concretizator.version>
       <hybrid-system-behavior.version>1.0.0</hybrid-system-behavior.version>
       
       <!-- plugins -->
@@ -315,11 +316,17 @@
          <artifactId>concrete-participant-behavior</artifactId>
          <version>${concrete-participant-behavior.version}</version>
       </dependency>
-      <!-- Coordination Delegate Generator -->
+      <!-- Coordination Logic Extractor -->
       <dependency>
          <groupId>com.github.sesygroup.choreography</groupId>
-         <artifactId>coordination-delegate-generator</artifactId>
-         <version>${coordination-delegate-generator.version}</version>
+         <artifactId>coordination-logic-extractor</artifactId>
+         <version>${coordination-logic-extractor.version}</version>
+      </dependency>
+      <!-- Coordination Logic Concretizator -->
+      <dependency>
+         <groupId>com.github.sesygroup.choreography</groupId>
+         <artifactId>coordination-logic-concretizator</artifactId>
+         <version>${coordination-logic-concretizator.version}</version>
       </dependency>
       <!-- Hybrid System Behavior -->
       <dependency>

@@ -33,7 +33,7 @@ import com.sesygroup.choreography.abstractparticipantbehavior.generator.Choreogr
 import com.sesygroup.choreography.abstractparticipantbehavior.model.AbstractParticipantBehavior;
 import com.sesygroup.choreography.choreographyspecification.model.Participant;
 import com.sesygroup.choreography.concreteparticipantbehavior.model.ConcreteParticipantBehavior;
-import com.sesygroup.choreography.coordinationdelegate.generator.CoordinationDelegateGenerator;
+import com.sesygroup.choreography.coordinationlogic.concretizator.CoordinationLogicConcretizator;
 import com.sesygroup.choreography.hybridsystembehavior.generator.HybridSystemBehaviorGenerator;
 import com.sesygroup.choreography.hybridsystembehavior.model.HybridSystemBehavior;
 import com.sesygroup.choreography.web.business.GenericResponseBody;
@@ -197,8 +197,8 @@ public class ChoreographyController {
           */
 
          Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> cds
-               = new CoordinationDelegateGenerator(ChoreographySpecificationMock.sample(),
-                     ConcreteParticipantsBehaviorMock.getAllConcreteParticipantBehavior()).generate();
+               = new CoordinationLogicConcretizator(ChoreographySpecificationMock.sample(),
+                     ConcreteParticipantsBehaviorMock.getAllConcreteParticipantBehavior()).concretize();
 
          return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
                CoordinationDelegateGeneratorConverter.getNetwork(cds));
