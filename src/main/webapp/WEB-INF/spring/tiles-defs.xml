@@ -85,4 +85,9 @@
       <put-attribute name="content" value="/WEB-INF/views/choreography/coordinationdelegate/coordinationdelegate.jsp" />
    </definition>
    
+         <!-- Choreography Synthesis -->
+   <definition name="choreography.synthesis" extends="layout">
+      <put-attribute name="content" value="/WEB-INF/views/choreography/synthesis/choreographysynthesis.jsp" />
+   </definition>
+   
 </tiles-definitions>

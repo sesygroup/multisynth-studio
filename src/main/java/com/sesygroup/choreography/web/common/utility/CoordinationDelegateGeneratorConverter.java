@@ -39,7 +39,7 @@ public class CoordinationDelegateGeneratorConverter {
    }
 
    public static Network getNetwork(
-         Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> participantPairToCoordinationDelegateMap) {
+      Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> participantPairToCoordinationDelegateMap) {
 
       Map<String, ConcreteParticipantBehavior> participantNameToCoordinationDelegateMap
             = participantPairToCoordinationDelegateMap.entrySet().stream()

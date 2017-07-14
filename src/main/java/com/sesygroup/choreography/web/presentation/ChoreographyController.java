@@ -33,7 +33,8 @@ import com.sesygroup.choreography.abstractparticipantbehavior.generator.Choreogr
 import com.sesygroup.choreography.abstractparticipantbehavior.model.AbstractParticipantBehavior;
 import com.sesygroup.choreography.choreographyspecification.model.Participant;
 import com.sesygroup.choreography.concreteparticipantbehavior.model.ConcreteParticipantBehavior;
-import com.sesygroup.choreography.coordinationlogic.concretizator.CoordinationLogicConcretizator;
+import com.sesygroup.choreography.coordinationlogic.extractor.CoordinationLogicExtractor;
+import com.sesygroup.choreography.coordinationlogic.realizer.CoordinationLogicRealizer;
 import com.sesygroup.choreography.hybridsystembehavior.generator.HybridSystemBehaviorGenerator;
 import com.sesygroup.choreography.hybridsystembehavior.model.HybridSystemBehavior;
 import com.sesygroup.choreography.web.business.GenericResponseBody;
@@ -60,7 +61,6 @@ import com.sesygroup.choreography.web.presentation.mock.CoordinationDelegatesMoc
 @RequestMapping("/choreography")
 public class ChoreographyController {
 
-
    @RequestMapping("/hybridsystembehavior")
    public String showHybridSystemBehavior() {
       return "choreography.hybridsystembehavior";
@@ -81,7 +81,19 @@ public class ChoreographyController {
       return "choreography.hybridsystembehavior";
    }
 
+   @RequestMapping("/synthesis")
+   public String showChoreographySynthesis() {
+      return "choreography.synthesis";
+   }
+
    // Choreography specification
+   @RequestMapping("/choreographyspecification/loadsample")
+   public @ResponseBody GenericResponseBody choreographySpecificationLoadSample() throws IOException {
+      return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
+            ChoreographySpecificationConverter.getNetwork(ChoreographySpecificationMock.sample()));
+   }
+
+   // Projection
    @RequestMapping(value = "/choreographyspecification/project", method = RequestMethod.POST,
          consumes = MediaType.APPLICATION_JSON_VALUE)
    public @ResponseBody GenericResponseBody choreographySpecificationProject(@RequestBody Network network)
@@ -100,11 +112,27 @@ public class ChoreographyController {
       }
    }
 
-   @RequestMapping("/choreographyspecification/loadsample")
-   public @ResponseBody GenericResponseBody choreographySpecificationLoadSample() throws IOException {
-      return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
-            ChoreographySpecificationConverter.getNetwork(ChoreographySpecificationMock.sample()));
+   // Coordination logic extraction
+   @RequestMapping("/abstractcoordinationlogic/loadFive")
+   public @ResponseBody GenericResponseBody abstractCoordinationLogicLoadFive() throws IOException {
+      return new GenericResponseBody(GenericResponseBodyState.SUCCESS, CoordinationDelegatesMock.sixCDs());
+   }
 
+   @RequestMapping(value = "/abstractcoordinationlogic/extract", method = RequestMethod.POST,
+         consumes = MediaType.APPLICATION_JSON_VALUE)
+   public @ResponseBody GenericResponseBody abstractCoordinationLogicExtract(@RequestBody Network network)
+         throws IOException {
+      try {
+         Map<Pair<Participant, Participant>, AbstractParticipantBehavior> abstractCoordinationLogic
+               = new CoordinationLogicExtractor(
+                     ChoreographySpecificationConverter.getChoreographySpecification(network)).generate();
+
+         return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
+               AbstractParticipantBehaviorConverter.getNetworkFromParticipantsPair(abstractCoordinationLogic));
+
+      } catch (Exception exception) {
+         return new GenericResponseBody(GenericResponseBodyState.ERROR, exception);
+      }
    }
 
    // Concrete participant behavior
@@ -112,9 +140,9 @@ public class ChoreographyController {
    public @ResponseBody GenericResponseBody concreteParticipantBehaviorLoadThree() throws IOException {
       Map<String, ConcreteParticipantBehavior> participantToConcreteParticipantBehaviorMap
             = new HashMap<String, ConcreteParticipantBehavior>();
-      participantToConcreteParticipantBehaviorMap.put("P1", ConcreteParticipantsBehaviorMock.p1());
-      participantToConcreteParticipantBehaviorMap.put("P2", ConcreteParticipantsBehaviorMock.p2());
-      participantToConcreteParticipantBehaviorMap.put("P3", ConcreteParticipantsBehaviorMock.p3());
+      participantToConcreteParticipantBehaviorMap.put("p1", ConcreteParticipantsBehaviorMock.p1());
+      participantToConcreteParticipantBehaviorMap.put("p2", ConcreteParticipantsBehaviorMock.p2());
+      participantToConcreteParticipantBehaviorMap.put("p3", ConcreteParticipantsBehaviorMock.p3());
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
             ConcreteParticipantBehaviorConverter.getNetwork(participantToConcreteParticipantBehaviorMap));
    }
@@ -123,14 +151,39 @@ public class ChoreographyController {
    public @ResponseBody GenericResponseBody concreteParticipantBehaviorLoadSix() throws IOException {
       Map<String, ConcreteParticipantBehavior> participantToConcreteParticipantBehaviorMap
             = new HashMap<String, ConcreteParticipantBehavior>();
-      participantToConcreteParticipantBehaviorMap.put("P1", ConcreteParticipantsBehaviorMock.p1());
-      participantToConcreteParticipantBehaviorMap.put("P2", ConcreteParticipantsBehaviorMock.p2());
-      participantToConcreteParticipantBehaviorMap.put("P3", ConcreteParticipantsBehaviorMock.p3());
-      participantToConcreteParticipantBehaviorMap.put("P4", ConcreteParticipantsBehaviorMock.p4());
-      participantToConcreteParticipantBehaviorMap.put("P5", ConcreteParticipantsBehaviorMock.p5());
-      participantToConcreteParticipantBehaviorMap.put("P6", ConcreteParticipantsBehaviorMock.p6());
+      participantToConcreteParticipantBehaviorMap.put("p1", ConcreteParticipantsBehaviorMock.p1());
+      participantToConcreteParticipantBehaviorMap.put("p2", ConcreteParticipantsBehaviorMock.p2());
+      participantToConcreteParticipantBehaviorMap.put("p3", ConcreteParticipantsBehaviorMock.p3());
+      participantToConcreteParticipantBehaviorMap.put("p4", ConcreteParticipantsBehaviorMock.p4());
+      participantToConcreteParticipantBehaviorMap.put("p5", ConcreteParticipantsBehaviorMock.p5());
+      participantToConcreteParticipantBehaviorMap.put("p6", ConcreteParticipantsBehaviorMock.p6());
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
             ConcreteParticipantBehaviorConverter.getNetwork(participantToConcreteParticipantBehaviorMap));
+   }
+
+   // Coordination delegate
+   @RequestMapping("/coordinationdelegate/loadFive")
+   public @ResponseBody GenericResponseBody coordinationDelegateLoadFive() throws IOException {
+      return new GenericResponseBody(GenericResponseBodyState.SUCCESS, CoordinationDelegatesMock.sixCDs());
+   }
+
+   @RequestMapping(value = "/coordinationdelegate/generate", method = RequestMethod.POST,
+         consumes = MediaType.APPLICATION_JSON_VALUE)
+   public @ResponseBody GenericResponseBody coordinationDelegateGenerate(@RequestBody NetworkMultiple networks)
+         throws IOException {
+      try {
+
+         Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> cds = new CoordinationLogicRealizer(
+               ChoreographySpecificationConverter.getChoreographySpecification(networks.getChoreographySpecification()),
+               ConcreteParticipantBehaviorConverter
+                     .getConcreteParticipantBehaviors(networks.getConcreteParticipantsBehavior())).realize();
+
+         return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
+               CoordinationDelegateGeneratorConverter.getNetwork(cds));
+
+      } catch (Exception exception) {
+         return new GenericResponseBody(GenericResponseBodyState.ERROR, exception);
+      }
    }
 
    // Hybrid system behavior
@@ -144,12 +197,13 @@ public class ChoreographyController {
 
       Map<com.sesygroup.choreography.hybridsystembehavior.model.Participant, Integer> participantToMessageQueueSizeMap
             = new HashMap<com.sesygroup.choreography.hybridsystembehavior.model.Participant, Integer>();
+
       ConcreteParticipantBehaviorConverter.getConcreteParticipantBehaviors(network).forEach((key, value) -> {
          participantToConcreteParticipantBehaviorMap
-               .put(new com.sesygroup.choreography.hybridsystembehavior.model.Participant(key), value);
+               .put(new com.sesygroup.choreography.hybridsystembehavior.model.Participant(key.getName()), value);
          // TODO fix assignment message queue, for now I fix to put 1 to except for participants: P4, P5, P6
          participantToMessageQueueSizeMap.put(
-               new com.sesygroup.choreography.hybridsystembehavior.model.Participant(key),
+               new com.sesygroup.choreography.hybridsystembehavior.model.Participant(key.getName()),
                (Arrays.asList("P4", "P5", "P6").contains(key))
                      ? 0
                      : 1);
@@ -176,35 +230,5 @@ public class ChoreographyController {
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
             NetworkUtils.getReachability(network, targetNode));
 
-   }
-
-   // Concrete participant behavior
-   @RequestMapping("/coordinationdelegate/loadFive")
-   public @ResponseBody GenericResponseBody coordinationDelegateLoadFive() throws IOException {
-      return new GenericResponseBody(GenericResponseBodyState.SUCCESS, CoordinationDelegatesMock.sixCDs());
-   }
-
-   // Choreography specification
-   @RequestMapping(value = "/coordinationdelegate/generate", method = RequestMethod.POST,
-         consumes = MediaType.APPLICATION_JSON_VALUE)
-   public @ResponseBody GenericResponseBody coordinationDelegateGenerate(@RequestBody NetworkMultiple networks)
-         throws IOException {
-      try {
-
-         /*
-          * Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> cds = new CoordinationDelegateGenerator(
-          * ChoreographySpecificationConverter.getChoreographySpecification(choreographySpacification)).generate();
-          */
-
-         Map<Pair<Participant, Participant>, ConcreteParticipantBehavior> cds
-               = new CoordinationLogicConcretizator(ChoreographySpecificationMock.sample(),
-                     ConcreteParticipantsBehaviorMock.getAllConcreteParticipantBehavior()).concretize();
-
-         return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
-               CoordinationDelegateGeneratorConverter.getNetwork(cds));
-
-      } catch (Exception exception) {
-         return new GenericResponseBody(GenericResponseBodyState.ERROR, exception);
-      }
    }
 }

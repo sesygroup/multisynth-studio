@@ -46,6 +46,7 @@
                            <li><a href="${pageContext.request.contextPath}/choreography/hybridsystembehavior"><spring:message code="hybrid.system.behavior.generator"/></a></li>
                            <li><a href="${pageContext.request.contextPath}/choreography/coordinationdelegate"><spring:message code="coordination.delegate.generator"/></a></li>
                            <li><a href="${pageContext.request.contextPath}/choreography/choreographedsystem"><spring:message code="choreographed.system"/></a></li>
+                           <li><a href="${pageContext.request.contextPath}/choreography/synthesis"><spring:message code="choreography.synthesis"/></a></li>
                         </ul>
                     </li>
 					<%--

@@ -24,6 +24,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.sesygroup.choreography.abstractparticipantbehavior.model.AbstractParticipantBehavior;
 import com.sesygroup.choreography.abstractparticipantbehavior.model.State;
@@ -43,6 +44,18 @@ import com.sesygroup.choreography.web.business.model.NetworkNode;
  *
  */
 public class AbstractParticipantBehaviorConverter {
+
+   public static Network getNetworkFromParticipantsPair(
+         Map<Pair<Participant, Participant>, AbstractParticipantBehavior> participantPairToAbstractParticipantBehaviorMap) {
+
+         Map<Participant, AbstractParticipantBehavior> participantNameToCoordinationDelegateMap
+               = participantPairToAbstractParticipantBehaviorMap.entrySet().stream()
+                     .collect(Collectors.toMap(
+                           e -> new Participant("CD_" + e.getKey().getLeft().getName() + "." + e.getKey().getRight().getName()),
+                           e -> e.getValue()));
+         return getNetwork(participantNameToCoordinationDelegateMap);
+
+      }
 
    public static Network getNetwork(
          Map<Participant, AbstractParticipantBehavior> participantToAbstractParticipantBehaviorMap) {

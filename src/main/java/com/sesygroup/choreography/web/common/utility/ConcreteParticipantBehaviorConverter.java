@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 
+import com.sesygroup.choreography.choreographyspecification.model.Participant;
 import com.sesygroup.choreography.concreteparticipantbehavior.model.ConcreteParticipantBehavior;
 import com.sesygroup.choreography.concreteparticipantbehavior.model.State;
 import com.sesygroup.choreography.concreteparticipantbehavior.model.Transition;
@@ -48,9 +49,9 @@ import com.sesygroup.choreography.web.business.model.NetworkNode;
  */
 public class ConcreteParticipantBehaviorConverter {
 
-   public static Map<String, ConcreteParticipantBehavior> getConcreteParticipantBehaviors(Network network) {
-      Map<String, ConcreteParticipantBehavior> participantToConcreteParticipantBehaviorMap
-            = new HashMap<String, ConcreteParticipantBehavior>();
+   public static Map<Participant, ConcreteParticipantBehavior> getConcreteParticipantBehaviors(Network network) {
+      Map<Participant, ConcreteParticipantBehavior> participantToConcreteParticipantBehaviorMap
+            = new HashMap<Participant, ConcreteParticipantBehavior>();
 
       Set<String> participants
             = network.getNodes().stream().map(NetworkNode::getParticipant).collect(Collectors.toSet());
@@ -75,10 +76,10 @@ public class ConcreteParticipantBehaviorConverter {
             // node.
             if (network.getNodes().get(network.getNodes().indexOf(new NetworkNode(item.getFrom()))).getParticipant()
                   .equals(participantName)) {
-               State sourceState
-                     = new State(network.getNodes().get(network.getNodes().indexOf(new NetworkNode(item.getFrom()))).getName());
-               State targetState
-                     = new State(network.getNodes().get(network.getNodes().indexOf(new NetworkNode(item.getTo()))).getName());
+               State sourceState = new State(
+                     network.getNodes().get(network.getNodes().indexOf(new NetworkNode(item.getFrom()))).getName());
+               State targetState = new State(
+                     network.getNodes().get(network.getNodes().indexOf(new NetworkNode(item.getTo()))).getName());
 
                // add messages
                if (item.getType().equals(NetworkConstants.TRANSITION_ASYNCH_SEND_ACTION)
@@ -118,7 +119,7 @@ public class ConcreteParticipantBehaviorConverter {
             }
          });
 
-         participantToConcreteParticipantBehaviorMap.put(participantName, concreteParticipantBehavior);
+         participantToConcreteParticipantBehaviorMap.put(new Participant(participantName), concreteParticipantBehavior);
       }
       return participantToConcreteParticipantBehaviorMap;
    }

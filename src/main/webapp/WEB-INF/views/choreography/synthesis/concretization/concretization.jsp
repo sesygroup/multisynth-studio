@@ -1,12 +1,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@include file="coordinationdelegate_javascript.jsp"%>
+<%@include file="concretization_javascript.jsp"%>
 
 <div class="row">
    <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
          <div class="x_title">
             <h2>
-               <spring:message code="coordination.delegate" />
+               <spring:message code="choreography.coordination.logic.concretization" />
             </h2>
             <ul class="nav navbar-right panel_toolbox">
                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -125,7 +125,7 @@
                   <spring:message code="coordination.delegate.load" />
                </button>
                <button id="generateCoordinationDelegates" class="btn btn-success btn-sm">
-                  <spring:message code="coordination.delegate.generate" />
+                  <spring:message code="choreography.coordination.logic.concretization" />
                </button>               
             </div>
          </div>
