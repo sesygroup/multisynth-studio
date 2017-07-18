@@ -121,9 +121,11 @@
             </div>
             <div class="clearfix"></div>
             <div class="margin_top_20">
+            <%--
                <button id="locadCoordinationDelegates" class="btn btn-warning btn-sm">
                   <spring:message code="coordination.delegate.load" />
                </button>
+             --%>
                <button id="generateCoordinationDelegates" class="btn btn-success btn-sm">
                   <spring:message code="choreography.coordination.logic.concretization" />
                </button>               

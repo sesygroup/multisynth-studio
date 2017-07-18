@@ -11,6 +11,7 @@ USE `multisynth-studio`;
 SET AUTOCOMMIT=0;
 LOCK TABLES user WRITE;
 INSERT INTO user VALUES (1,"Admin", "Admin", "admin", "5f4dcc3b5aa765d61d8327deb882cf99", "admin.admin@gmail.com", NULL, TRUE, FALSE, "2017-04-30 15:41:00");
+INSERT INTO user VALUES (2,"guest", "guest", "guest", "084e0343a0486ff05530df6c705c8bb4", "guest.guest@gmail.com", NULL, TRUE, FALSE, "2017-04-30 15:41:00");
 UNLOCK TABLES;
 COMMIT;
 
@@ -31,6 +32,7 @@ COMMIT;
 SET AUTOCOMMIT=0;
 INSERT INTO user_role VALUES
 (1, 1, "2017-04-30 15:41:00");
+(2, 2, "2017-04-30 15:41:00");
 COMMIT;
 
 SET SQL_MODE=@OLD_SQL_MODE;

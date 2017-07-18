@@ -257,11 +257,12 @@
             </div>
             <div class="clearfix"></div>
             <div class="margin_top_20">
-               <button id="loadCpbThree" class="btn btn-warning btn-sm">
+               <%--<button id="loadCpbThree" class="btn btn-warning btn-sm">
                   <spring:message code="concrete.participant.behavior.load.three" />
                </button>
-               <button id="loadCpbSix" class="btn btn-warning btn-sm">
-                  <spring:message code="concrete.participant.behavior.load.six" />
+               --%>
+               <button id="loadCpbSix" class="btn btn-success btn-sm">
+                  <spring:message code="choreography.selection.select" />
                </button>
             </div>
          </div>

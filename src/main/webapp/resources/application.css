@@ -197,7 +197,7 @@ input#username.parsley-success.custom-parsley-success, input.parsley-success.cus
    background-image: url("images/check-ok.png");
    background-size: 20px 15px;
    background-position: right 10px center !important;
-   background-epeat: no-repeat;
+   background-repeat: no-repeat;
    padding-right: 40px;
 }
 

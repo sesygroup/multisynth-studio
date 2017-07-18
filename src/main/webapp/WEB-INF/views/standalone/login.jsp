@@ -39,10 +39,12 @@
                      <spring:message code="common.signin" />
                   </h1>
                   <div>
-                     <input type="text" name="j_username" placeholder="<spring:message code='user.username' />" required="required" class="form-control" />
+                     <span style="float: left;">default: guest</span>
+                     <input type="text" name="j_username" placeholder="<spring:message code='user.username' />" required="required" class="form-control" value="guest"/>
                   </div>
                   <div>
-                     <input type="password" name="j_password" placeholder="<spring:message code='user.password' />" required="required" class="form-control" />
+                     <span style="float: left;">default: guest</span>
+                     <input type="password" name="j_password" placeholder="<spring:message code='user.password' />" required="required" class="form-control" value="guest"/>
                   </div>
                   <div>
                      <button class="btn btn-theme btn-block" type="submit">

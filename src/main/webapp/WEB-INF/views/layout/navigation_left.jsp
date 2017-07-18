@@ -42,10 +42,12 @@
                     </security:authorize>
                     <li><a><i class="fa fa-transgender-alt"></i><spring:message code="choreography"/><span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
+                           <%--
                            <li><a href="${pageContext.request.contextPath}/choreography/abstractparticipantbehavior"><spring:message code="abstract.participant.behavior.generator"/></a></li>
                            <li><a href="${pageContext.request.contextPath}/choreography/hybridsystembehavior"><spring:message code="hybrid.system.behavior.generator"/></a></li>
                            <li><a href="${pageContext.request.contextPath}/choreography/coordinationdelegate"><spring:message code="coordination.delegate.generator"/></a></li>
                            <li><a href="${pageContext.request.contextPath}/choreography/choreographedsystem"><spring:message code="choreographed.system"/></a></li>
+                            --%>
                            <li><a href="${pageContext.request.contextPath}/choreography/synthesis"><spring:message code="choreography.synthesis"/></a></li>
                         </ul>
                     </li>
