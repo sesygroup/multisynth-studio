@@ -34,17 +34,27 @@
       <div class="login_wrapper">
          <div class="animate form signin_form">
             <section class="login_content">
+
                <form action="${pageContext.request.contextPath}/j_spring_security_check" data-parsley-validate="data-parsley-validate" method="post">
                   <h1>
                      <spring:message code="common.signin" />
                   </h1>
+                    <div class="row" style="margin-bottom: 37px">
+                      <div class="animated flipInY col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: left;">
+                        <div class="tile-stats">
+                          <div class="icon"><i class="fa fa-user"></i>
+                          </div>
+                          <div class="count">Guest User</div>
+                          <h4 style="text-align: left;padding-left: 10px;">Username: guest</h4>
+                          <h4 style="text-align: left;padding-left: 10px;">Password: guest</h4>
+                        </div>
+                      </div>
+                    </div>
                   <div>
-                     <span style="float: left;">default: guest</span>
-                     <input type="text" name="j_username" placeholder="<spring:message code='user.username' />" required="required" class="form-control" value="guest"/>
+                     <input type="text" name="j_username" placeholder="<spring:message code='user.username' />" required="required" class="form-control"/>
                   </div>
                   <div>
-                     <span style="float: left;">default: guest</span>
-                     <input type="password" name="j_password" placeholder="<spring:message code='user.password' />" required="required" class="form-control" value="guest"/>
+                     <input type="password" name="j_password" placeholder="<spring:message code='user.password' />" required="required" class="form-control"/>
                   </div>
                   <div>
                      <button class="btn btn-theme btn-block" type="submit">
