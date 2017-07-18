@@ -21,8 +21,8 @@ COMMIT;
 --
 
 SET AUTOCOMMIT=0;
-INSERT INTO role VALUES (1, "administrator", "System administrator", "2017-04-30 15:41:00"),
-(2, "user", "Generic user", "2017-04-30 15:41:00");
+INSERT INTO role VALUES (1, "administrator", "System administrator", "2017-04-30 15:41:00");
+INSERT INTO role VALUES (2, "user", "Generic user", "2017-04-30 15:41:00");
 COMMIT;
 
 --
@@ -30,9 +30,8 @@ COMMIT;
 --
 
 SET AUTOCOMMIT=0;
-INSERT INTO user_role VALUES
-(1, 1, "2017-04-30 15:41:00");
-(2, 2, "2017-04-30 15:41:00");
+INSERT INTO user_role VALUES (1, 1, "2017-04-30 15:41:00");
+INSERT INTO user_role VALUES (2, 2, "2017-04-30 15:41:00");
 COMMIT;
 
 SET SQL_MODE=@OLD_SQL_MODE;
