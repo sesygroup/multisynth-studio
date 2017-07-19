@@ -16,7 +16,7 @@
       <security:intercept-url pattern="/" access="permitAll" />
       <security:intercept-url pattern="/static/**" access="permitAll" />
       <security:intercept-url pattern="/welcome/**" access="isAuthenticated()" />
-      <security:intercept-url pattern="/settings/**" access="isAuthenticated()" />
+      <security:intercept-url pattern="/settings/**" access="!hasRole('guest')" />
       <security:intercept-url pattern="/administration/**" access="hasAnyRole('administrator')" />
       
       <!-- for utility controller -->
