@@ -17,12 +17,17 @@
       <put-attribute name="content_top" value="/WEB-INF/views/layout/content_top.jsp" />
       <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
    </definition>
-
-   <!-- Setting -->
+   
    <definition name="common.welcome" extends="layout">
       <put-attribute name="content" value="/WEB-INF/views/common/welcome.jsp" />
    </definition>
+   
+       <!-- About us -->
+   <definition name="common.aboutus" extends="layout">
+      <put-attribute name="content" value="/WEB-INF/views/common/aboutus.jsp" />
+   </definition>
      
+   <!-- Setting -->  
    <definition name="settings.account" extends="layout">
       <put-attribute name="active" value="account"/>
       <put-attribute name="action" value="/settings/account" />

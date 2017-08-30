@@ -33,7 +33,7 @@
            
 			<div class="menu_section">
                 <ul class="nav side-menu">
-                 <security:authorize access="hasAnyRole('administrator')">
+                    <security:authorize access="hasAnyRole('administrator')">
 					<li><a><i class="fa fa-bug"></i><spring:message code="common.manage"/><span class="fa fa-chevron-down"></span></a>
 						   <ul class="nav child_menu">
 							   <li><a href="${pageContext.request.contextPath}/administration/user/list"><spring:message code="users"/></a></li>
@@ -51,6 +51,7 @@
                            <li><a href="${pageContext.request.contextPath}/choreography/synthesis"><spring:message code="choreography.synthesis"/></a></li>
                         </ul>
                     </li>
+                    <li><a href="${pageContext.request.contextPath}/aboutus"><i class="fa fa-at"></i><spring:message code="common.aboutus"/></a></li>
 					<%--
                         <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                     --%>

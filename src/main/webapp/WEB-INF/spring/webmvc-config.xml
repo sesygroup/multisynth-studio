@@ -54,12 +54,13 @@
    <!-- Selects a static view for rendering without the need for an explicit controller -->
    <mvc:view-controller path="/" view-name="standalone.login" />
    <mvc:view-controller path="/welcome" view-name="common.welcome" />
+   <mvc:view-controller path="/aboutus" view-name="common.aboutus" />
    <mvc:view-controller path="/login" view-name="standalone.login" />
    <mvc:view-controller path="/login#forgot" view-name="standalone.login" />
    <mvc:view-controller path="/logintimeout" view-name="standalone.logintimeout" />
    <mvc:view-controller path="/accessdenied" view-name="standalone.accessdenied" />
    <mvc:view-controller path="/resourcenotfound" view-name="standalone.resourcenotfound" />
-
+   
 
    <!-- ================= INTERNATIONALIZATION ================= -->
    <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
