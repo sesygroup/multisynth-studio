@@ -41,7 +41,7 @@
                         <div class="well profile_view">
                            <div class="col-sm-12">
                               <h4 class="brief">
-                                 <i>Assistant Professor</i>
+                                 <i>Associate Professor</i>
                               </h4>
                               <div class="left col-xs-7">
                                  <h2>Marco Autili</h2>
@@ -64,7 +64,7 @@
                         <div class="well profile_view">
                            <div class="col-sm-12">
                               <h4 class="brief">
-                                 <i>Ph.D. Student</i>
+                                 <i>Ph.D.</i>
                               </h4>
                               <div class="left col-xs-7">
                                  <h2>Alexander Perucci</h2>
@@ -74,7 +74,7 @@
                                  </a>
                               </div>
                               <div class="right col-xs-5 text-center">
-                                 <img src="static/images/AlexanderPerucci.jpg" alt="" class="img-circle img-responsive">
+                                 <img src="static/images/AlexanderPerucci.png" alt="" class="img-circle img-responsive">
                               </div>
                            </div>
                         </div>
