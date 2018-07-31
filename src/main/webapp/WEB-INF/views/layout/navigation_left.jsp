@@ -40,6 +40,11 @@
 						   </ul>
                     </li>
                     </security:authorize>
+					<li><a><i class="fa fa-th-large"></i><spring:message code="mediator"/><span class="fa fa-chevron-down"></span></a>
+						   <ul class="nav child_menu">
+							   <li><a href="${pageContext.request.contextPath}/mediator/synthesis"><spring:message code="mediator.synthesis"/></a></li>
+						   </ul>
+                    </li>
                     <li><a><i class="fa fa-transgender-alt"></i><spring:message code="choreography"/><span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                            <%--

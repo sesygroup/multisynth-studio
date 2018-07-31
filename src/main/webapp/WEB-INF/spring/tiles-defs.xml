@@ -85,14 +85,19 @@
       <put-attribute name="content" value="/WEB-INF/views/choreography/hybridsystembehavior/hybridsystembehavior.jsp" />
    </definition>
    
-      <!-- Hybrid System Behavior -->
+   <!-- Hybrid System Behavior -->
    <definition name="choreography.coordinationdelegate" extends="layout">
       <put-attribute name="content" value="/WEB-INF/views/choreography/coordinationdelegate/coordinationdelegate.jsp" />
    </definition>
    
-         <!-- Choreography Synthesis -->
+   <!-- Choreography Synthesis -->
    <definition name="choreography.synthesis" extends="layout">
       <put-attribute name="content" value="/WEB-INF/views/choreography/synthesis/choreographysynthesis.jsp" />
+   </definition>
+   
+   <!-- Mediator Synthesis -->
+   <definition name="mediator.synthesis" extends="layout">
+      <put-attribute name="content" value="/WEB-INF/views/mediator/synthesis/mediatorsynthesis.jsp" />
    </definition>
    
 </tiles-definitions>
