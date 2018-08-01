@@ -22,7 +22,8 @@ Parsley.addMessages('it', {
   check:          "Devi scegliere tra %s e %s opzioni.",
   equalto:        "Questo valore deve essere identico.",
   participant_exists: "Nome partecipante gi&agrave; esistente.",
-  state_exists:       "Nome stato gi&agrave; esistente."
+  state_exists:       "Nome stato gi&agrave; esistente.",
+  state_exists_skip_selected:       "Nome stato gi&agrave; esistente."
 });
 
 Parsley.setLocale('it');

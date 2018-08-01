@@ -1,2 +1,2 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@include file="service_design/service_design.jsp"%>
+<%@include file="networked_system_protocol/networked_system_protocol.jsp"%>

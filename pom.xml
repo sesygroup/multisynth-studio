@@ -149,7 +149,6 @@
       <javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
       <slf4j.version>1.7.12</slf4j.version>
       <slf4j-log4j12.version>1.7.12</slf4j-log4j12.version>
-      <junit.version>4.12</junit.version>
       <commons-dbcp2.version>2.1.1</commons-dbcp2.version>
       <commons-collections.version>3.2.2</commons-collections.version>
       <commons-codec.version>1.10</commons-codec.version>
@@ -180,6 +179,11 @@
       <maven-changes-plugin.version>2.12.1</maven-changes-plugin.version>
       <!-- site dependencies -->
       <doxia-module-markdown.version>1.7</doxia-module-markdown.version>
+      
+      <!-- test dependencies -->
+      <junit.version>4.12</junit.version>
+      <hamcrest-library.version>1.3</hamcrest-library.version>
+      <mockito-all.version>1.10.19</mockito-all.version>
    </properties>
    
    <dependencies>
@@ -430,10 +434,27 @@
       </dependency>
 
       <!-- Test -->
+      <!-- JUnit is a unit testing framework for Java, created by Erich Gamma 
+         and Kent Beck. https://mvnrepository.com/artifact/junit/junit/4.12 -->
       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <version>${junit.version}</version>
+         <scope>test</scope>
+      </dependency>
+      
+      <!-- Hamcrest library of matcher implementations. https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library -->
+      <dependency>
+         <groupId>org.hamcrest</groupId>
+         <artifactId>hamcrest-library</artifactId>
+         <version>${hamcrest-library.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <!-- Mock objects library for java https://mvnrepository.com/artifact/org.mockito/mockito-all/1.10.19 -->
+      <dependency>
+         <groupId>org.mockito</groupId>
+         <artifactId>mockito-all</artifactId>
+         <version>${mockito-all.version}</version>
          <scope>test</scope>
       </dependency>
 

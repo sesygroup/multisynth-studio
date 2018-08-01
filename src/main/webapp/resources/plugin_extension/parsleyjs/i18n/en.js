@@ -24,7 +24,8 @@ Parsley.addMessages('en', {
   check:          "You must select between %s and %s choices.",
   equalto:        "This value should be the same.",
   participant_exists: "Participant name already exists.",
-  state_exists:       "State name already exists."
+  state_exists:       "State name already exists.",
+  state_exists_skip_selected:       "State name already exists."
 });
 
 Parsley.setLocale('en');

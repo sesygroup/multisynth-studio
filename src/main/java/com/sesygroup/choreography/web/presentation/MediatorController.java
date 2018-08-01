@@ -67,14 +67,14 @@ public class MediatorController {
    }
 
    // Service Blue Client
-   @RequestMapping("/service/loadblueclient")
+   @RequestMapping("/nsp/loadblueclient")
    public @ResponseBody GenericResponseBody serviceLoadBlueClient() throws IOException {
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
             ChoreographySpecificationConverter.getNetwork(ChoreographySpecificationMock.sample()));
    }
    
    // Moon Service
-   @RequestMapping("/service/loadmoonservice")
+   @RequestMapping("/nsp/loadmoonservice")
    public @ResponseBody GenericResponseBody serviceLoadMoonService() throws IOException {
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
             ChoreographySpecificationConverter.getNetwork(ChoreographySpecificationMock.sample()));
