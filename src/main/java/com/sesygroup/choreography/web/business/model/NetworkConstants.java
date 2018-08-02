@@ -47,6 +47,14 @@ public class NetworkConstants {
 
    public static final String TRANSITION_SYNCH_SEND_RECEIVE_ACTION_AND_MESSAGE_CONSUMPTION = "synchSendReceiveActionAndMessageConsumption";
 
+   public static final String ACTION_PROVIDED_REQUEST_RESPONSE = "request-response";
+
+   public static final String ACTION_PROVIDED_ONE_WAY = "one-way";
+   
+   public static final String ACTION_REQUIRED_SOLICIT_RESPONSE = "solicit-response";
+   
+   public static final String ACTION_REQUIRED_NOTIFICATION = "notification";
+   
    public static final String MESSAGE_INPUT = "?";
 
    public static final String MESSAGE_OUTPUT = "!";

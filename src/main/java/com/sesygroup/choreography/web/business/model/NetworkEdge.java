@@ -32,7 +32,8 @@ public class NetworkEdge implements java.io.Serializable {
    private String message;
    private String participantSendMessage;
    private String participantReceiveMessage;
-
+   private NetworkAction action;
+   
    public NetworkEdge() {
       super();
    }
@@ -42,7 +43,7 @@ public class NetworkEdge implements java.io.Serializable {
       this.id = id;
    }
 
-   // used for a transition in a and concrete participant behavior
+   // used for a transition in a concrete participant behavior
    public NetworkEdge(String id, String from, String to, String title, String label, boolean dashes, String type,
          String message) {
       super();
@@ -56,7 +57,7 @@ public class NetworkEdge implements java.io.Serializable {
       this.message = message;
    }
 
-   // used for a transition in a choreography specification hybrid system behavior
+   // used for a transition in a choreography specification and hybrid system behavior
    public NetworkEdge(String id, String from, String to, String title, String label, boolean dashes, String type,
          String message, String participantSendMessage, String participantReceiveMessage) {
       super();
@@ -70,6 +71,18 @@ public class NetworkEdge implements java.io.Serializable {
       this.message = message;
       this.participantSendMessage = participantSendMessage;
       this.participantReceiveMessage = participantReceiveMessage;
+   }
+   
+   // used for a transition in a networked system protocol
+   public NetworkEdge(String id, String from, String to, String title, String label,
+         NetworkAction action) {
+      super();
+      this.id = id;
+      this.from = from;
+      this.to = to;
+      this.title = title;
+      this.label = label;
+      this.action = action;
    }
 
    public String getId() {
@@ -150,6 +163,14 @@ public class NetworkEdge implements java.io.Serializable {
 
    public void setParticipantReceiveMessage(String participantReceiveMessage) {
       this.participantReceiveMessage = participantReceiveMessage;
+   }
+   
+   public NetworkAction getAction() {
+      return action;
+   }
+
+   public void setAction(NetworkAction action) {
+      this.action = action;
    }
 
    @Override

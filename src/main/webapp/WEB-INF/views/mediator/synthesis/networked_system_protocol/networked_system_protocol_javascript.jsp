@@ -145,10 +145,11 @@
                   $('#nsp-transition-node-from').val(nsp_nodesDataset.get(data.from).name);
                   $('#nsp-transition-node-to-id').val(data.to);
                   $('#nsp-transition-node-to').val(nsp_nodesDataset.get(data.to).name);
-
-                  $("#nsp-transition-message").parsley().reset();
+                  $("#nsp-transition-action-operation").parsley().reset();
+                  $('#nsp-transition-action-input-parameters').importTags('');
+                  $('#nsp-transition-action-output-parameters').importTags('');
+                  $('#nsp-transition-action-type').val('request-response').change();
                   $('#nsp-transition-popUp-modal').modal('show');
-
                   callback(null);
                },
                deleteEdge: function(data, callback) {
@@ -218,7 +219,18 @@
          $('#property-nsp-transition-label').val(nsp_edgesDataset.get(edgeID).label);
          $('#property-nsp-transition-from').val(nsp_nodesDataset.get(nsp_edgesDataset.get(edgeID).from).name);
          $('#property-nsp-transition-to').val(nsp_nodesDataset.get(nsp_edgesDataset.get(edgeID).to).name);
-         $('#property-nsp-transition-message').val(nsp_edgesDataset.get(edgeID).message);
+         $('#property-nsp-transition-action-operation').val(nsp_edgesDataset.get(edgeID).action.operationName);
+         $('#property-nsp-transition-action-type').val(nsp_edgesDataset.get(edgeID).action.type).change();
+         
+         //reset all input and output before add them
+         $('#property-nsp-transition-action-input-parameters').importTags('');
+         $('#property-nsp-transition-action-output-parameters').importTags('');
+         $.each(nsp_edgesDataset.get(edgeID).action.inputParameters,function( index, value ) {
+        	 $('#property-nsp-transition-action-input-parameters').addTag(value);
+         });
+         $.each(nsp_edgesDataset.get(edgeID).action.outputParameters,function( index, value ) {
+        	 $('#property-nsp-transition-action-output-parameters').addTag(value);
+         });
       }
 
       function nsp_detroyNetwork() {
@@ -228,21 +240,6 @@
          }
       }
 
-
-      function nsp_transitionExists(sourceNode, targetNode, type, message) {
-         var exists = false;
-         nsp_edgesDataset.get().forEach(function(edge) {
-            if (edge.from === sourceNode &&
-               edge.to === targetNode &&
-               edge.type === type &&
-               edge.message === message) {
-               exists = true;
-            }
-         });
-
-         return exists;
-      }
-
       function stateExists(stateName) {
          var exists = false;
          nsp_nodesDataset.get().forEach(function(node) {
@@ -250,7 +247,6 @@
                exists = true;
             }
          });
-
          return exists;
       }
 
@@ -261,12 +257,8 @@
                 exists = true;
              }
           });
-
           return exists;
        }
-
-      
-
 
       function saveNode() {
          $("#nsp-state-name").parsley().validate();
@@ -299,17 +291,22 @@
       }
 
       function saveTransition() {
-         $("#nsp-transition-message").parsley().validate();
-
-         if ($("#nsp-transition-message").parsley().isValid() === true) {
+         $("#nsp-transition-action-operation").parsley().validate();
+         
+            var label = "< " + $("#nsp-transition-action-operation").val() + ", " + "{" + $("#nsp-transition-action-input-parameters").val().replace(",", ", ") + "}, " + "{" + $("#nsp-transition-action-output-parameters").val().replace(",", ", ") + "}, " + (($("#nsp-transition-action-type").val() === "request-response" || $("#nsp-transition-action-type").val() === "one-way") ? "required" : "provided")+">";         
+            if ($("#nsp-transition-action-operation").parsley().isValid() === true) {
             nsp_edgesDataset.add({
                from: $("#nsp-transition-node-from-id").val(),
                to: $("#nsp-transition-node-to-id").val(),
-               label: $("#nsp-transition-message").val() + " " + $("#nsp-transition-message-participant-sending").val() + "->" + $("#nsp-transition-message-participant-receiving").val(),
-               title: $("#nsp-transition-message").val() + " " + $("#nsp-transition-message-participant-sending").val() + "->" + $("#nsp-transition-message-participant-receiving").val(),
-               type: $("#nsp-transition-type").val(),
-               dashes: false,
-               message: $("#nsp-transition-message").val()
+               label: label,
+               title: "("+$("#nsp-transition-node-from").val() + ", " + label + ", " + $("#nsp-transition-node-to").val()+")",
+               action: { 
+            	   operationName: $("#nsp-transition-action-operation").val(),
+            	   type: $("#nsp-transition-action-type").val(),
+                   inputParameters: $("#nsp-transition-action-input-parameters").val().split(","),
+                   outputParameters:$("#nsp-transition-action-output-parameters").val().split(",")
+               },
+    	       dashes: false
             });
             $('#nsp-transition-popUp-modal').modal('hide');
             hideAllProperties();
@@ -319,8 +316,7 @@
 
 
       $(document).ready(function() {
-
-         window.Parsley.addValidator('state_exists', {
+		window.Parsley.addValidator('state_exists', {
             validateString: function(value) {
                return !stateExists(value);
             }
@@ -362,7 +358,6 @@
              }
            });
 
-
          $("#saveNodeButton").click(function(e) {
             e.preventDefault();
             saveNode();
@@ -398,13 +393,108 @@
                }
             });
          });
+         
+         $("#testMoonService")
+         .click(function(e) {
+            e.preventDefault();
+            $
+               .ajax("${pageContext.request.contextPath}/mediator/nsp/testmoonservice", {
+                  type: 'POST',
+                  data: JSON.stringify({
+                     "nodes": nsp_nodesDataset.get(),
+                     "edges": nsp_edgesDataset.get()
+                  }),
+                  dataType: 'json',
+                  contentType: "application/json",
+                  success: function(data) {
+                     if (data.state == "SUCCESS") {
+                        showMessage("success", "<spring:message code='common.success' />", "<spring:message code='choreography.specification.project.success.message' />");
+                     } else if (data.state == "ERROR") {
+                        showMessage("error", "<spring:message code='common.error' />", data.result.message);
+                     }
+
+                  },
+                  error: function(XMLHttpRequest, textStatus,
+                     errorThrown) {
+                     console.log(textStatus);
+                  }
+               });
+         });
+         
+         
+         
+         
          $('#nsp-physics').on("change", function(e) {
             nsp_network.setOptions({
                physics: !this.checked
             });
          });
 
-
+        
+         $("#property-nsp-transition-action-type").change(function () {
+        	 if ($(this).val() === "one-way"|| $(this).val() === "notification"){
+        		 $("#property-nsp-transition-action-output-parameters-div").hide();
+        	 }else{
+        		 $("#property-nsp-transition-action-output-parameters-div").show();
+        	 }
+         });
+         
+         $("#nsp-transition-action-type").change(function () {
+        	 if ($(this).val() === "one-way"|| $(this).val() === "notification"){
+        		 $("#nsp-transition-action-output-parameters-div").hide();
+        	 }else{
+        		 $("#nsp-transition-action-output-parameters-div").show();
+        	 }
+         });
+        
+        // for input parameters of an action
+        $('#property-nsp-transition-action-input-parameters').tagsInput({
+        	   'height':'40px;',
+        	   'width':'100%',
+        	   'interactive':true,
+        	   'defaultText':'<spring:message code='nsp.action.parameters.add' />',
+        	   'removeWithBackspace' : true,
+        	   'minChars' : 0,
+        	   'maxChars' : 0, // if not provided there is no limit
+        	   'placeholderColor' : '#666666'
+        	});
+        
+        $('#nsp-transition-action-input-parameters').tagsInput({
+      	   'height':'40px;',
+      	   'width':'100%',
+      	   'interactive':true,
+      	   'defaultText':'<spring:message code='nsp.action.parameters.add' />',
+      	   'removeWithBackspace' : true,
+      	   'minChars' : 0,
+      	   'maxChars' : 0, // if not provided there is no limit
+      	   'placeholderColor' : '#666666'
+      	});
+        
+         // Property for output parameter of an action
+         $('#property-nsp-transition-action-output-parameters').tagsInput({
+      	   'height':'40px;',
+    	   'width':'100%',
+    	   'interactive':true,
+    	   'defaultText':'<spring:message code='nsp.action.parameters.add' />',
+    	   'removeWithBackspace' : true,
+    	   'minChars' : 0,
+    	   'maxChars' : 0, // if not provided there is no limit
+    	   'placeholderColor' : '#666666'
+    	});
+         
+         $('#nsp-transition-action-output-parameters').tagsInput({
+        	   'height':'40px;',
+        	   'width':'100%',
+        	   'interactive':true,
+        	   'defaultText':'<spring:message code='nsp.action.parameters.add' />',
+        	   'removeWithBackspace' : true,
+        	   'minChars' : 0,
+        	   'maxChars' : 0, // if not provided there is no limit
+        	   'placeholderColor' : '#666666'
+        	});
+         
+         
+         
 
          nsp_initNetwork([], []);
          // add initial state

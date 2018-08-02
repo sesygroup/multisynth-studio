@@ -84,4 +84,11 @@ public class NetworkUtils {
             .collect(Collectors.toList()).stream().map(id -> new NetworkNode(id)).collect(Collectors.toList());
       return Utility.convertTo(CollectionUtils.subtract(allNodes, allTargetNodes), NetworkNode.class);
    }
+   
+   public static Collection<NetworkNode> getFinalStates(Network network) {
+      List<NetworkNode> allNodes = network.getNodes().stream().collect(Collectors.toList());
+      List<NetworkNode> allSourceNodes = network.getEdges().stream().map(NetworkEdge::getFrom)
+            .collect(Collectors.toList()).stream().map(id -> new NetworkNode(id)).collect(Collectors.toList());
+      return Utility.convertTo(CollectionUtils.subtract(allNodes, allSourceNodes), NetworkNode.class);
+   }
 }

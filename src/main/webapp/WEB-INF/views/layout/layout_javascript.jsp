@@ -21,6 +21,9 @@
 <script src="${pageContext.request.contextPath}/static/plugin_extension/datatables/datatables-columnfilter.js"></script>
 <script src="${pageContext.request.contextPath}/static/plugin_extension/datatables/datatables-columnfilter-utility.js"></script>
 
+<!-- jQuery Tags Input -->
+<script src="${pageContext.request.contextPath}/static/gentelella/vendors/jquery.tagsinput/src/jquery.tagsinput.js"></script>
+    
 <%-- Select2 --%>
 <script src="${pageContext.request.contextPath}/static/gentelella/vendors/select2/dist/js/select2.full.min.js"></script>
 

@@ -17,14 +17,14 @@ package com.sesygroup.choreography.networkedsystemprotocol.model.parameter;
 
 import java.io.Serializable;
 
-import com.sesygroup.choreography.concreteparticipantbehavior.model.Message;
+import com.sesygroup.choreography.networkedsystemprotocol.model.Parameter;
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public class OutputParameter extends Message implements Serializable {
+public class OutputParameter extends Parameter implements Serializable {
    private static final long serialVersionUID = -4391989082142037202L;
 
    public OutputParameter() {

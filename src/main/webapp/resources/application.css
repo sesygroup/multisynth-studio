@@ -209,6 +209,14 @@ input#username.parsley-success.custom-parsley-success, input.parsley-success.cus
 #languages a{
    margin-right: 10px;
 }
+
+/* remove the triangle at the right of input tags*/
+
+.tag:after {
+	content: none;
+}
+
+
 /*===== END common =====*/
 
 /*===== START administration =====*/
