@@ -13,33 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model;
+package com.sesygroup.choreography.behavioralprotocol.model.type;
 
 import java.io.Serializable;
+
+import com.sesygroup.choreography.behavioralprotocol.model.Type;
+
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public class State implements Serializable {
-   private static final long serialVersionUID = -6935812141806320370L;
-	private String name;
-
-   public State() {
+public class BasicType extends Type implements Serializable {
+   private static final long serialVersionUID = -8813922673600037385L;
+   private String name;
+   
+   public BasicType() {
       super();
    }
 
-   public State(final String name) {
-      super();
-      this.name = name;
-   }
-
-   public String getName() {
-      return name;
-   }
-
-   public void setName(final String name) {
+   public BasicType(final String name) {
       this.name = name;
    }
 
@@ -64,7 +58,7 @@ public class State implements Serializable {
       if (getClass() != obj.getClass()) {
          return false;
       }
-      State other = (State) obj;
+      BasicType other = (BasicType) obj;
       if (name == null) {
          if (other.name != null) {
             return false;
@@ -79,4 +73,5 @@ public class State implements Serializable {
    public String toString() {
       return name;
    }
+
 }

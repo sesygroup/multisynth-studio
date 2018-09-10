@@ -13,31 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model;
+package com.sesygroup.choreography.behavioralprotocol.model;
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public abstract class Action {
-   protected String operationName;
-
-   public Action() {
+public abstract class Type {
+   public Type() {
       super();
-   }
-
-   public Action(final String operationName) {
-      super();
-      this.operationName = operationName;
-   }
-
-   public String getOperationName() {
-      return operationName;
-   }
-
-   public void setOperationName(String operationName) {
-      this.operationName = operationName;
    }
 
    @Override

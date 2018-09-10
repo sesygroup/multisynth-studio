@@ -13,35 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model.parameter;
+package com.sesygroup.choreography.behavioralprotocol.model;
 
 import java.io.Serializable;
-
-import com.sesygroup.choreography.networkedsystemprotocol.model.Parameter;
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public class InputParameter extends Parameter implements Serializable {
-   private static final long serialVersionUID = -4819117447336615072L;
+public class State implements Serializable {
+	private static final long serialVersionUID = 6111505705559312804L;
+   private String name;
 
-   public InputParameter() {
+   public State() {
       super();
    }
 
-   public InputParameter(final String name) {
-      super(name);
+   public State(final String name) {
+      super();
+      this.name = name;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(final String name) {
+      this.name = name;
    }
 
    @Override
    public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((super.name == null)
+      result = prime * result + ((name == null)
             ? 0
-            : super.name.hashCode());
+            : name.hashCode());
       return result;
    }
 
@@ -56,12 +64,12 @@ public class InputParameter extends Parameter implements Serializable {
       if (getClass() != obj.getClass()) {
          return false;
       }
-      InputParameter other = (InputParameter) obj;
-      if (super.name == null) {
+      State other = (State) obj;
+      if (name == null) {
          if (other.name != null) {
             return false;
          }
-      } else if (!super.name.equals(other.name)) {
+      } else if (!name.equals(other.name)) {
          return false;
       }
       return true;
@@ -69,7 +77,6 @@ public class InputParameter extends Parameter implements Serializable {
 
    @Override
    public String toString() {
-      return super.name;
+      return name;
    }
-
 }

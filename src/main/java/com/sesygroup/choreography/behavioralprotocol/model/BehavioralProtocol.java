@@ -13,36 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model;
+package com.sesygroup.choreography.behavioralprotocol.model;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class NetworkedSystemProtocol implements Serializable {
-   private static final long serialVersionUID = 8815617060540221440L;
+public class BehavioralProtocol implements Serializable {
+   private static final long serialVersionUID = -5667906893960955624L;
    private Set<State> states;
    private State initialState;
    private Set<State> finalStates;
-   private Set<Action> actions;
+   private Set<TypedMessage> messages;
    private Set<Transition> transitions;
 
-   public NetworkedSystemProtocol() {
+   public BehavioralProtocol() {
       super();
       states = new HashSet<State>();
       initialState = null;
       finalStates = new HashSet<State>();
-      actions = new HashSet<Action>();
+      messages = new HashSet<TypedMessage>();
       transitions = new HashSet<Transition>();
    }
 
-   public NetworkedSystemProtocol(final Set<State> states, final State initialState, final Set<State> finalStates,
-         final Set<Action> actions, final Set<Transition> transitions) {
+   public BehavioralProtocol(final Set<State> states, final State initialState, final Set<State> finalStates,
+         final Set<TypedMessage> messages, final Set<Transition> transitions) {
       super();
       this.states = states;
       this.initialState = initialState;
       this.finalStates = finalStates;
-      this.actions = actions;
+      this.messages = messages;
       this.transitions = transitions;
    }
 
@@ -70,12 +70,12 @@ public class NetworkedSystemProtocol implements Serializable {
       this.finalStates = finalStates;
    }
 
-   public Set<Action> getActions() {
-      return actions;
+   public Set<TypedMessage> getMessages() {
+      return messages;
    }
 
-   public void setActions(Set<Action> actions) {
-      this.actions = actions;
+   public void setMessages(Set<TypedMessage> messages) {
+      this.messages = messages;
    }
 
    public Set<Transition> getTransitions() {
@@ -92,16 +92,16 @@ public class NetworkedSystemProtocol implements Serializable {
     * in the set of states. Checks whether all finalStates are contained
     * in the set of states.
     *
-    * @return {@code true} if the NetworkedSystemProtocol is validated,
+    * @return {@code true} if the BehavioralProtocol is validated,
     *         {@code false} otherwise
     */
    public boolean validate() {
       // TODO improve validate method
 
-      // checks whether the NetworkedSystemProtocol has an empty set of states,
-      // finalStates, actions, transitions and the
+      // checks whether the BehavioralProtocol has an empty set of states,
+      // finalStates, messages, transitions and the
       // initialState is equals to null
-      if (states.isEmpty() && initialState == null && finalStates.isEmpty() && actions.isEmpty()
+      if (states.isEmpty() && initialState == null && finalStates.isEmpty() && messages.isEmpty()
             && transitions.isEmpty()) {
          return true;
       }
@@ -124,8 +124,8 @@ public class NetworkedSystemProtocol implements Serializable {
       result = prime * result + ((states == null) ? 0 : states.hashCode());
       result = prime * result + ((initialState == null) ? 0 : initialState.hashCode());
       result = prime * result + ((finalStates == null) ? 0 : finalStates.hashCode());
-      result = prime * result + ((finalStates == null) ? 0 : actions.hashCode());
-      result = prime * result + ((actions == null) ? 0 : transitions.hashCode());
+      result = prime * result + ((messages == null) ? 0 : messages.hashCode());
+      result = prime * result + ((transitions == null) ? 0 : transitions.hashCode());
       return result;
    }
 
@@ -140,7 +140,7 @@ public class NetworkedSystemProtocol implements Serializable {
       if (getClass() != obj.getClass()) {
          return false;
       }
-      NetworkedSystemProtocol other = (NetworkedSystemProtocol) obj;
+      BehavioralProtocol other = (BehavioralProtocol) obj;
       if (states == null) {
          if (other.states != null) {
             return false;
@@ -162,11 +162,11 @@ public class NetworkedSystemProtocol implements Serializable {
       } else if (!finalStates.equals(other.finalStates)) {
          return false;
       }
-      if (actions == null) {
-         if (other.actions != null) {
+      if (messages == null) {
+         if (other.messages != null) {
             return false;
          }
-      } else if (!actions.equals(other.actions)) {
+      } else if (!messages.equals(other.messages)) {
          return false;
       }
       if (transitions == null) {

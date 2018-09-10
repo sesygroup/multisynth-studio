@@ -16,7 +16,6 @@
 package com.sesygroup.choreography.web.presentation;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -25,16 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sesygroup.choreography.abstractparticipantbehavior.generator.ChoreographyProjection;
-import com.sesygroup.choreography.abstractparticipantbehavior.model.AbstractParticipantBehavior;
-import com.sesygroup.choreography.choreographyspecification.model.Participant;
 import com.sesygroup.choreography.web.business.GenericResponseBody;
 import com.sesygroup.choreography.web.business.GenericResponseBody.GenericResponseBodyState;
 import com.sesygroup.choreography.web.business.model.Network;
-import com.sesygroup.choreography.web.common.utility.AbstractParticipantBehaviorConverter;
-import com.sesygroup.choreography.web.common.utility.ChoreographySpecificationConverter;
-import com.sesygroup.choreography.web.common.utility.NetworkedSystemProtocolConverter;
-import com.sesygroup.choreography.web.presentation.mock.NetworkedSystemProtocolMock;
+import com.sesygroup.choreography.web.common.utility.BehavioralProtocolConverter;
+import com.sesygroup.choreography.web.presentation.mock.BehavioralProtocolMock;
 
 /**
  *
@@ -51,27 +45,32 @@ public class MediatorController {
    }
 
    // Service Blue Client
-   @RequestMapping("/nsp/loadblueclient")
+   @RequestMapping("/behavioralprotocol/loadblueclient")
    public @ResponseBody GenericResponseBody serviceLoadBlueClient() throws IOException {
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
-            NetworkedSystemProtocolConverter.getNetwork(NetworkedSystemProtocolMock.blueClientProtocol()));
+            BehavioralProtocolConverter.getNetwork(BehavioralProtocolMock.blueClientBehavioralProtocol()));
    }
 
    // Moon Service
-   @RequestMapping("/nsp/loadmoonservice")
+   @RequestMapping("/behavioralprotocol/loadmoonservice")
    public @ResponseBody GenericResponseBody serviceLoadMoonService() throws IOException {
       return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
-            NetworkedSystemProtocolConverter.getNetwork(NetworkedSystemProtocolMock.moonServiceProtocol()));
+            BehavioralProtocolConverter.getNetwork(BehavioralProtocolMock.moonServiceBehavioralProtocol()));
+   }
+
+   // Moon Service
+   @RequestMapping("/behavioralprotocol/loadmoonserviceTest")
+   public @ResponseBody GenericResponseBody serviceLoadMoonServiceTest() throws IOException {
+      return new GenericResponseBody(GenericResponseBodyState.SUCCESS,
+            BehavioralProtocolMock.moonServiceBehavioralProtocol());
    }
 
    // Test Moon Service
-   @RequestMapping(value = "/nsp/testmoonservice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-   public @ResponseBody GenericResponseBody choreographySpecificationProject(@RequestBody Network network)
-         throws IOException {
+   @RequestMapping(value = "/behavioralprotocol/testmoonservice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+   public @ResponseBody GenericResponseBody test(@RequestBody Network network) throws IOException {
       try {
-
-         if (NetworkedSystemProtocolConverter.getNetworkedSystemProtocol(network)
-               .equals(NetworkedSystemProtocolMock.moonServiceProtocol())) {
+         if (BehavioralProtocolConverter.getBehavioralProtocol(network)
+               .equals(BehavioralProtocolMock.moonServiceBehavioralProtocol())) {
             return new GenericResponseBody(GenericResponseBodyState.SUCCESS);
          } else {
             return new GenericResponseBody(GenericResponseBodyState.ERROR, "false equals");

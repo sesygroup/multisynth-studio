@@ -13,35 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model.parameter;
+package com.sesygroup.choreography.behavioralprotocol.model.typedmessage;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import com.sesygroup.choreography.networkedsystemprotocol.model.Parameter;
+import com.sesygroup.choreography.behavioralprotocol.model.TypedElement;
+import com.sesygroup.choreography.behavioralprotocol.model.TypedMessage;
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public class OutputParameter extends Parameter implements Serializable {
-   private static final long serialVersionUID = -4391989082142037202L;
+public class TypedInputMessage extends TypedMessage implements Serializable {
+   private static final long serialVersionUID = 1482021440848784661L;
 
-   public OutputParameter() {
+   public TypedInputMessage() {
       super();
    }
 
-   public OutputParameter(final String name) {
-      super(name);
+   public TypedInputMessage(final String name, final List<TypedElement> typedElements) {
+      super(name, typedElements);
    }
 
    @Override
    public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ((super.name == null)
-            ? 0
-            : super.name.hashCode());
+      result = prime * result + ((super.name == null) ? 0 : super.name.hashCode());
+      result = prime * result + ((super.typedElements == null) ? 0 : super.typedElements.hashCode());
       return result;
    }
 
@@ -56,7 +58,7 @@ public class OutputParameter extends Parameter implements Serializable {
       if (getClass() != obj.getClass()) {
          return false;
       }
-      OutputParameter other = (OutputParameter) obj;
+      TypedInputMessage other = (TypedInputMessage) obj;
       if (super.name == null) {
          if (other.name != null) {
             return false;
@@ -64,12 +66,20 @@ public class OutputParameter extends Parameter implements Serializable {
       } else if (!super.name.equals(other.name)) {
          return false;
       }
+      if (super.typedElements == null) {
+         if (other.typedElements != null)
+            return false;
+      } else if (!super.typedElements.equals(other.typedElements))
+         return false;
       return true;
    }
 
    @Override
    public String toString() {
-      return super.name;
+      return "(" + super.name + "," + this.typedElementsToString() + ")?";
    }
 
+   public String typedElementsToString() {
+      return "[" + super.typedElements.stream().map(Object::toString).collect(Collectors.joining(" ")) + "]";
+   };
 }

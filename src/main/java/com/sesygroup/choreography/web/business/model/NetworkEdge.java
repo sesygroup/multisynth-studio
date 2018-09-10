@@ -32,7 +32,8 @@ public class NetworkEdge implements java.io.Serializable {
    private String message;
    private String participantSendMessage;
    private String participantReceiveMessage;
-   private NetworkAction action;
+   private String typedMessageName;
+   private String typedMessageContent;
    
    public NetworkEdge() {
       super();
@@ -73,16 +74,18 @@ public class NetworkEdge implements java.io.Serializable {
       this.participantReceiveMessage = participantReceiveMessage;
    }
    
-   // used for a transition in a networked system protocol
-   public NetworkEdge(String id, String from, String to, String title, String label,
-         NetworkAction action) {
+   // used for a transition in a behavioral protocol
+   public NetworkEdge(String id, String from, String to, String title, String label, String type,
+         String typedMessageName, String typedMessageContent) {
       super();
       this.id = id;
       this.from = from;
       this.to = to;
       this.title = title;
       this.label = label;
-      this.action = action;
+      this.type = type;
+      this.typedMessageName = typedMessageName;
+      this.typedMessageContent = typedMessageContent;
    }
 
    public String getId() {
@@ -164,13 +167,22 @@ public class NetworkEdge implements java.io.Serializable {
    public void setParticipantReceiveMessage(String participantReceiveMessage) {
       this.participantReceiveMessage = participantReceiveMessage;
    }
-   
-   public NetworkAction getAction() {
-      return action;
+
+
+   public String getTypedMessageName() {
+      return typedMessageName;
    }
 
-   public void setAction(NetworkAction action) {
-      this.action = action;
+   public void setTypedMessageName(String typedMessageName) {
+      this.typedMessageName = typedMessageName;
+   }
+
+   public String getTypedMessageContent() {
+      return typedMessageContent;
+   }
+
+   public void setTypedMessageContent(String typedMessageContent) {
+      this.typedMessageContent = typedMessageContent;
    }
 
    @Override

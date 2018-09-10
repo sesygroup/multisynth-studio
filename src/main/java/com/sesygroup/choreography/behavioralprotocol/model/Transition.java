@@ -13,38 +13,50 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sesygroup.choreography.networkedsystemprotocol.model;
+package com.sesygroup.choreography.behavioralprotocol.model;
 
 /**
  *
  * @author Alexander Perucci (http://www.alexanderperucci.com/)
  *
  */
-public abstract class Parameter {
-   protected String name;
+public abstract class Transition {
+   protected State sourceState;
+   protected State targetState;
 
-   public Parameter() {
+   public Transition() {
       super();
+      sourceState = null;
+      targetState = null;
    }
 
-   public Parameter(final String name) {
+   public Transition(final State sourceState, final State targetState) {
       super();
-      this.name = name;
+      this.sourceState = sourceState;
+      this.targetState = targetState;
    }
 
-   public String getName() {
-      return name;
+   public State getSourceState() {
+      return sourceState;
    }
 
-   public void setName(final String name) {
-      this.name = name;
+   public void setSourceState(final State sourceState) {
+      this.sourceState = sourceState;
+   }
+
+   public State getTargetState() {
+      return targetState;
+   }
+
+   public void setTargetState(final State targetState) {
+      this.targetState = targetState;
    }
 
    @Override
    public abstract int hashCode();
 
    @Override
-   public abstract boolean equals(Object obj);
+   public abstract boolean equals(final Object obj);
 
    @Override
    public abstract String toString();
