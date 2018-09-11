@@ -118,7 +118,7 @@ public class BehavioralProtocolConverter {
          if (ReceiveActionTransition.class.isInstance(transition)) {
             edges.add(new NetworkEdge(UUID.randomUUID().toString(), stateToID.get(transition.getSourceState()),
                   stateToID.get(transition.getTargetState()), transition.toString(),
-                  ((ReceiveActionTransition) transition).getTypedInputMessage().toString(),
+                  ((ReceiveActionTransition) transition).getTypedInputMessage().getSimpleTypedMessageName(),
                   NetworkConstants.TRANSITION_RECEIVE_ACTION,
                   ((ReceiveActionTransition) transition).getTypedInputMessage().getName(),
                   ((ReceiveActionTransition) transition).getTypedInputMessage().typedElementsToString()));
@@ -127,7 +127,7 @@ public class BehavioralProtocolConverter {
          if (SendActionTransition.class.isInstance(transition)) {
             edges.add(new NetworkEdge(UUID.randomUUID().toString(), stateToID.get(transition.getSourceState()),
                   stateToID.get(transition.getTargetState()), transition.toString(),
-                  ((SendActionTransition) transition).getTypedOutputMessage().toString(),
+                  ((SendActionTransition) transition).getTypedOutputMessage().getSimpleTypedMessageName(),
                   NetworkConstants.TRANSITION_SEND_ACTION,
                   ((SendActionTransition) transition).getTypedOutputMessage().getName(),
                   ((SendActionTransition) transition).getTypedOutputMessage().typedElementsToString()));

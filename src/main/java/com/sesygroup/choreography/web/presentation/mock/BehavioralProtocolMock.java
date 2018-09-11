@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Software Engineering and Synthesis Group
+ * Copyright 2017 Software Engineering and Synthesis Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

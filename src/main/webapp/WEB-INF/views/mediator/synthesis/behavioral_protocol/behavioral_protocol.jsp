@@ -19,14 +19,14 @@
                   <div class="modal-content">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
+                           <span aria-hidden="true">×</span>
                         </button>
                         <h4 class="modal-title" id="bp-node-popUp-modal-label">
                            <spring:message code="bp.state.create" />
                         </h4>
                      </div>
                      <div class="modal-body">
-                        <input type="hidden" id="bp-state-id" name="bp-state-y" class="form-control" />
+                        <input type="hidden" id="bp-state-id" name="bp-state-id" class="form-control" />
                         <input type="hidden" id="bp-state-x" name="bp-state-x" class="form-control" />
                         <input type="hidden" id="bp-state-y" name="bp-state-y" class="form-control" />
                         <input type="hidden" id="bp-state-action" name="bp-state-action" class="form-control" />
@@ -57,13 +57,15 @@
                   <div class="modal-content">
                      <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
+                           <span aria-hidden="true">×</span>
                         </button>
                         <h4 class="modal-title" id="bp-transition-popUp-modal-label">
                            <spring:message code="bp.transition.create" />
                         </h4>
                      </div>
                      <div class="modal-body">
+                        <input type="hidden" id="bp-transition-id" name="bp-transition-id" class="form-control" />
+                        <input type="hidden" id="bp-transition-action" name="bp-transition-action" class="form-control" />
                         <div class="row">
                            <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-node-from">
                               <spring:message code="bp.state.source" />
@@ -82,9 +84,6 @@
                               <input type="text" id="bp-transition-node-to" name="bp-transition-node-to" class="form-control" disabled />
                            </div>
                         </div>
-                        
-                        
-                        
                         <div class="row">
                            <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-type">
                               <spring:message code="bp.transition.type" />
@@ -103,27 +102,26 @@
                               </select>
                            </div>
                         </div>
-                       
-						<div id="bp-transition-typedmessage-div">
-						<div class="row">
-                           <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-typedmessage-name">
-                              <spring:message code="bp.transition.typedmessage.name" />
-                              <span class="required">*</span>
-                           </label>
-                           <div class="col-md-9 col-sm-12 col-xs-12">
-                              <input type="text" id="bp-transition-typedmessage-name" name="bp-transition-typedmessage-name" data-parsley-trigger="focusout" required="required" class="form-control" />
+                        <div id="bp-transition-typedmessage-div">
+                           <div class="row">
+                              <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-typedmessage-name">
+                                 <spring:message code="bp.transition.typedmessage.name" />
+                                 <span class="required">*</span>
+                              </label>
+                              <div class="col-md-9 col-sm-12 col-xs-12">
+                                 <input type="text" id="bp-transition-typedmessage-name" name="bp-transition-typedmessage-name" data-parsley-trigger="focusout" required="required" class="form-control" />
+                              </div>
+                           </div>
+                           <div class="row">
+                              <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-typedmessage-content">
+                                 <spring:message code="bp.transition.typedmessage.content" />
+                                 <span class="required">*</span>
+                              </label>
+                              <div class="col-md-9 col-sm-12 col-xs-12">
+                                 <input type="text" id="bp-transition-typedmessage-content" name="bp-transition-typedmessage-content" data-parsley-trigger="focusout" required="required" class="form-control" />
+                              </div>
                            </div>
                         </div>
-                        <div class="row">
-                           <label class="col-md-3 col-sm-12 col-xs-12 text-md-right text-sm-left text-xs-left" for="bp-transition-typedmessage-content">
-                              <spring:message code="bp.transition.typedmessage.content" />
-                              <span class="required">*</span>
-                           </label>
-                           <div class="col-md-9 col-sm-12 col-xs-12">
-                              <input type="text" id="bp-transition-typedmessage-content" name="bp-transition-typedmessage-content" data-parsley-trigger="focusout" required="required" class="form-control" />
-                           </div>
-                        </div>
-                       </div>
                      </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -136,12 +134,11 @@
                   </div>
                </div>
             </div>
-            
             <div id="behavioralprotocol_vis_container" class="col-md-8 col-sm-8 col-xs-12 vis_container"></div>
             <div class="col-md-4 col-sm-4 col-xs-12">
                <div class="">
                   <label>
-                     <input type="checkbox" id="bp-physics" class="form-control js-switch" /> 
+                     <input type="checkbox" id="bp-physics" class="form-control js-switch" />
                      <spring:message code="mediator.editor.lock" />
                   </label>
                </div>
@@ -227,31 +224,37 @@
                            <spring:message code="bp.transition.type" />
                         </p>
                         <select id="property-bp-transition-type" name="property-bp-transition-type" class="form-control" tabindex="-1">
-                            <option value="sendAction">
-                               <spring:message code="bp.transition.type.send" />
-                            </option>
-                            <option value="receiveAction">
-                               <spring:message code="bp.transition.type.receive" />
-                            </option>
-                            <option value="internalAction">
-                               <spring:message code="bp.transition.type.internal" />
-                            </option>
+                           <option value="sendAction">
+                              <spring:message code="bp.transition.type.send" />
+                           </option>
+                           <option value="receiveAction">
+                              <spring:message code="bp.transition.type.receive" />
+                           </option>
+                           <option value="internalAction">
+                              <spring:message code="bp.transition.type.internal" />
+                           </option>
                         </select>
                      </div>
-              <div id="property-bp-transition-typedmessage-div">       
-                     <div class="property">
-                        <p>
-                           <spring:message code="bp.transition.typedmessage.name" />
-                        </p>
-                        <input type="text" id="property-bp-transition-typedmessage-name" name="property-bp-transition-typedmessage-name" data-parsley-trigger="focusout" required="required" class="form-control" />
+                     <div id="property-bp-transition-typedmessage-div">
+                        <div class="property">
+                           <p>
+                              <spring:message code="bp.transition.typedmessage.name" />
+                           </p>
+                           <input type="text" id="property-bp-transition-typedmessage-name" name="property-bp-transition-typedmessage-name" data-parsley-trigger="focusout" required="required" class="form-control" />
+                        </div>
+                        <div class="property">
+                           <p>
+                              <spring:message code="bp.transition.typedmessage.content" />
+                           </p>
+                           <input type="text" id="property-bp-transition-typedmessage-content" name="property-bp-transition-typedmessage-content" data-parsley-trigger="focusout" required="required" class="form-control" />
+                        </div>
                      </div>
                      <div class="property">
-                        <p>
-                           <spring:message code="bp.transition.typedmessage.content" />
-                        </p>
-                        <input type="text" id="property-bp-transition-typedmessage-content" name="property-bp-transition-typedmessage-content" data-parsley-trigger="focusout" required="required" class="form-control" />
+                        <p></p>
+                        <button id="property-bp-transition-update" type="button" class="btn btn-primary">
+                           <spring:message code="common.update" />
+                        </button>
                      </div>
-               </div>      
                   </div>
                </div>
             </div>
@@ -263,9 +266,7 @@
                <button id="locadMoonService" class="btn btn-warning btn-sm">
                   <spring:message code="bp.load.moonservice" />
                </button>
-               <button id="testMoonService" class="btn btn-warning btn-sm">
-                  Test Moon Service protocol
-               </button>
+               <button id="testMoonService" class="btn btn-warning btn-sm"> Test Moon Service protocol </button>
             </div>
          </div>
       </div>

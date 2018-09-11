@@ -64,5 +64,7 @@ public abstract class TypedMessage {
    public abstract String toString();
    
    public abstract String typedElementsToString();
+   
+   public abstract String getSimpleTypedMessageName();
 
 }

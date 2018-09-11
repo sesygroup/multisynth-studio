@@ -82,5 +82,9 @@ public class TypedOutputMessage extends TypedMessage implements Serializable {
    public String typedElementsToString() {
       return "[" + super.typedElements.stream().map(Object::toString).collect(Collectors.joining(" ")) + "]";
    };
+   
+   public String getSimpleTypedMessageName() {
+      return super.name+"!";
+   }
 
 }
