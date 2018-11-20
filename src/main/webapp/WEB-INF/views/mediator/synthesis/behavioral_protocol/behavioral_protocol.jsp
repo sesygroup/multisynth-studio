@@ -266,7 +266,7 @@
                <button id="locadMoonService" class="btn btn-warning btn-sm">
                   <spring:message code="bp.load.moonservice" />
                </button>
-               <button id="testMoonService" class="btn btn-warning btn-sm"> Test Moon Service protocol </button>
+               <%-- <button id="testMoonService" class="btn btn-warning btn-sm"> Test Moon Service protocol </button> --%>
             </div>
          </div>
       </div>
